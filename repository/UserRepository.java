@@ -50,10 +50,11 @@ public class UserRepository implements Repository<User> {
 	         while (sc.hasNextLine()) {
 	            String[] str = sc.nextLine().split("/");
 	            
-	            User user = new User(str[0].trim(), str[1].trim(), str[2].trim(), Integer.parseInt(str[3].trim()), Integer.parseInt(str[3].trim()), str[5].trim().equals("1"));
+	            User user = new User(str[0].trim(), str[1].trim(), str[2].trim(), Integer.parseInt(str[3].trim()), Integer.parseInt(str[4].trim()), str[5].trim().equals("1"));
 	            
 	            
-	            ArrayList<User> userArr = (ArrayList<User>) users.values();
+	            ArrayList<User> userArr = new ArrayList<User>();
+	            userArr.addAll(users.values());
 	            for(User u:userArr) {
 	               if(u.getUserName().equals(user.getUserName()) || u.getOrder() == user.getOrder())
 	                  throw new IndexOutOfBoundsException(); //1

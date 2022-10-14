@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.ArrayList;	
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class StoreRepository implements Repository<Store> {
 	private HashMap<String, Store> storeMap;
 	
 	/*텍스트 파일 디렉토리, ##수정 필수##*/
-	private File file = new File("data/storeList.txt");
+	private File file = new File(".\\src\\data\\storeList.txt");
 	
 	
 	public StoreRepository() {
