@@ -27,7 +27,6 @@ public class Main {
 		StoreRepository sr = new StoreRepository();
 		MenuRepository mr = new MenuRepository(ur.getUserlist(), sr.getStoreMap());
 		
-	
 		us = new UserService(ur, v);
 		ms = new MenuService(mr, ur, v);
 		ss = new StoreService(sr, v);
