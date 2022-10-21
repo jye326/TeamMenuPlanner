@@ -20,12 +20,12 @@ public class UserRepository implements Repository<User> {
 	private HashMap <String, User> userMap;
 	private Validation valid;
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File("PlanTheMenu\\\\src\\\\data\\userList.txt");
+	File file = new File("data/userList.txt");
 	
 	
 	public UserRepository(Validation valid) {
 		this.valid = valid;
-		this.readFile();
+		this.userMap =  this.readFile();
 	}
 
 	/*
@@ -113,6 +113,7 @@ public class UserRepository implements Repository<User> {
 		User user;
 		user = (User)o;
 		userMap.put(user.getId(), user);
+		this.readFile();
 		return true;
 	}
 	
@@ -142,20 +143,14 @@ public class UserRepository implements Repository<User> {
 		currentUser.setOrder(i);
 	}
 	
-	public HashMap<String, User> getUserlist() {
+	
+	
+	public HashMap<String, User> getUserMap() {
 		return userMap;
 	}
 
-	public void setUserlist(HashMap<String, User> userMap) {
-		userMap = userMap;
-	}
-	
-	public HashMap<String, User> getUserMap() {
-		return this.readFile();
-	}
-
 	public void setUserMap(HashMap<String, User> userMap) {
-		userMap = userMap;
+		this.userMap = userMap;
 	}
 
 }

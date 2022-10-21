@@ -22,7 +22,7 @@ public class StoreService {
 	public void registerStore() {
 		while(true) {
 			System.out.println("등록할 음식점 정보를 입력하세요.");
-			System.out.println("ex) 음식점 이름 / 위치 / 음식 종류 / 가격");
+			System.out.println("ex) 음식점 이름 / 음식점 위치 / 음식점 메뉴(카테고리)");
 			String str = scan.nextLine();
 			
 			if(str.equals("exit")) return;

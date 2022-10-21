@@ -101,7 +101,9 @@ public class Validation {
             return false;
          }
       }
-      ArrayList<User> userArr = (ArrayList<User>) users.values();
+      ArrayList<User> userArr = new ArrayList<>(); 
+      userArr.addAll(users.values());
+      
       for(User u:userArr) {
          if(u.getUserName().equals(str))
             return false;
@@ -159,6 +161,7 @@ public class Validation {
    }
 
    public boolean storeLocCheck(String str) {
+	   System.out.println(str);
 
       for (int i = 0; i < locs.length; i++) {
          if (str.equals(locs[i]))
@@ -190,6 +193,7 @@ public class Validation {
 
    public int userRegisterInputCheck(String str, HashMap<String, User> users) { // 회원가입 할 떄 검사하는 입력 검사하는 함수
       // 나중에 int형으로 바꾸어서 error표시해야할듯
+	   System.out.println(str);
       String[] ArraysStr = str.split(" "); // '/'(슬래쉬 기호) 앞뒤 요소를 공백으로 쪼개어 문자열 배열에 넣을게
       if (ArraysStr.length != 7)// 아이디, '/' , 비밀번호 , '/' , 사용자이름 , '/', 서열 요소가 7개가 아니면
          return 0;   //문법규칙위반
@@ -218,18 +222,19 @@ public class Validation {
 
    public boolean storeRegisterCheck(String str, HashMap<String ,Store> stores) {
       String[] ArraysStr = str.split(" / "); // '/'(슬래쉬 기호) 앞뒤 요소를 공백으로 쪼개어 문자열 배열에 넣을게
+     
       if (ArraysStr.length != 3)// 음식점 메뉴 , 음식점 이름 ,음식점 위치 요소가 3개가 아니면
          return false;
       ArraysStr[0] = ArraysStr[0].trim();
       ArraysStr[1] = ArraysStr[1].trim();
-      if (!menuNameCheck(ArraysStr[0]))
-         return false;
-      if (!storeNameCheck(ArraysStr[1]))
-         return false;
-      if (!storeLocCheck(ArraysStr[2]))
-         return false;
-      if(stores.containsKey(str))   //이름이 같은 음식점이 있는 경우
-         return false;
+      if (!storeNameCheck(ArraysStr[0])) {
+         System.out.println("1");return false;}
+      if (!storeLocCheck(ArraysStr[1])) {
+    	  System.out.println("2");return false;}
+      if (!menuNameCheck(ArraysStr[2])) {
+    	  System.out.println("3");return false;}
+      if(stores.containsKey(str)) {   //이름이 같은 음식점이 있는 경우
+    	  System.out.println("4");return false;}
    
       return true;
    }

@@ -14,8 +14,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(System.getProperty("user.dir"));
-		System.out.println("asdf");
+		
+		
 		UserService us;
 		MenuService ms;
 		StoreService ss;
@@ -27,16 +27,7 @@ public class Main {
 		Validation v = new Validation();
 		UserRepository ur = new UserRepository(v);		
 		StoreRepository sr = new StoreRepository();
-		System.out.println(sr.getStoreMap());
-		MenuRepository mr = new MenuRepository(ur.getUserlist(), sr.getStoreMap());
-		
-		//getuserlist랑 getusermap 다른건가
-		//readfile 안에 users가 아니라 Usermap(전역변수)에 값 할당해야하는거 아닌가 
-		//storelist도 똑같은 문제
-
-		//박성준23333test
-		//김용현123123123
-
+		MenuRepository mr = new MenuRepository(ur.getUserMap(), sr.getStoreMap());
 		
 		us = new UserService(ur, v);
 		ms = new MenuService(mr, ur, v);
@@ -47,7 +38,7 @@ public class Main {
 			String menu = scan.nextLine();
 			if(v.submenuInputCheck(menu)) {	//메뉴 입력이 옳으면
 				if(menu.equals("1")) {	//로그인
-					while(true) {
+					exit: while(true) {
 						int rs = us.login();
 						if(rs == 1) {	//로그인 성공 -> 주 프롬프트로 이동
 							while(true) {
@@ -62,16 +53,16 @@ public class Main {
 								}else if(mainMenu.equals("4")) {
 									us.changeOrder();
 								}else if(mainMenu.equals("5")) {
-									break;
+									break exit;
 								}else if(mainMenu.equals("exit")){
-									break;
+									break exit;
 								}else {
 									System.out.println("올바르지 않은 입력입니다. 다시 입력해주세요.");
 								}
 							}
 						}
 						else if(rs == -1);
-						else if(rs == 0) continue;
+						else if(rs == 0) break;
 					}
 				}else if(menu.equals("2")){	//회원가입
 					while(true) {

@@ -15,7 +15,7 @@ public class UserService {
 	
 	public UserService(UserRepository usRepository, Validation v) {	
 		this.usRepository = usRepository;
-		this.userMap = this.usRepository.getUserlist();
+		this.userMap = this.usRepository.getUserMap();
 		this.v = v;
 	}
 
@@ -24,7 +24,7 @@ public class UserService {
 	
 	public int changeOrder() {
 		
-		ArrayList<User> userList = (ArrayList<User>) usRepository.getUserlist().values();
+		ArrayList<User> userList = (ArrayList<User>) usRepository.getUserMap().values();
 		
 		System.out.println("<서열관리>");
 		System.out.println("아이디\t사용자 이름\t서열");
@@ -35,11 +35,11 @@ public class UserService {
 		String name = scan.nextLine();
 		
 		if(name.equals("exit")) return 0;
-		int N = usRepository.getUserlist().get(name).getOrder();	//대상의 현재 서열 N
-		usRepository.getUserlist().get(name).setOrder(usRepository.getCurrentUser().getOrder());//현재 유저 서열로 대상서열을 변경
+		int N = usRepository.getUserMap().get(name).getOrder();	//대상의 현재 서열 N
+		usRepository.getUserMap().get(name).setOrder(usRepository.getCurrentUser().getOrder());//현재 유저 서열로 대상서열을 변경
 		usRepository.getCurrentUser().setOrder(N);	// N으로 현재 유저의 서열 변경
 		
-		userList = (ArrayList<User>) usRepository.getUserlist().values();
+		userList = (ArrayList<User>) usRepository.getUserMap().values();
 		System.out.println("서열관리>");
 		System.out.println("아이디\t사용자 이름\t서열");
 		for(int i = 0; i< userList.size(); i++) {
@@ -96,7 +96,8 @@ public class UserService {
 			//순서대로 ID/PW/NAME/RANK/LOCKSTACK/ISREPORTED
 			User user = new User(str[0],str[2],str[4],Integer.parseInt(str[6]), 0, false);
 			usRepository.create(user);
-			usRepository.saveFile((ArrayList<User>) usRepository.getUserlist().values());	//추가된 유저정보가 포함된 userlist객체를 ArrayList로 캐스팅해서 파일에 저장
+			// usRepository.saveFile((ArrayList<User>) usRepository.getUserMap().values());	//추가된 유저정보가 포함된 userlist객체를 ArrayList로 캐스팅해서 파일에 저장
+			
 			System.out.println("회원가입이 완료되었습니다!");
 			return 1;
 		}
