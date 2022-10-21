@@ -26,7 +26,7 @@ public class MenuService {
 	/*
 	 * 식단표 조정 함수
 	 */
-	
+
 	public void teamMenuPlan() {
 		int cCount = 0;	//기능 사용했는지
 		Menu[] origin = new Menu[7];
