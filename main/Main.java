@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		System.out.println(System.getProperty("user.dir"));
-		
+		System.out.println("asdf");
 		UserService us;
 		MenuService ms;
 		StoreService ss;
@@ -33,8 +33,10 @@ public class Main {
 		//getuserlist랑 getusermap 다른건가
 		//readfile 안에 users가 아니라 Usermap(전역변수)에 값 할당해야하는거 아닌가 
 		//storelist도 똑같은 문제
-		//주용은주용은
-		System.out.println("Juyongeun");
+
+		//박성준23333test
+		//김용현123123123
+
 		
 		us = new UserService(ur, v);
 		ms = new MenuService(mr, ur, v);
