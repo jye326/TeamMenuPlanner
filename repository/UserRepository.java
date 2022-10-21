@@ -20,7 +20,7 @@ public class UserRepository implements Repository<User> {
 	private HashMap <String, User> userMap;
 	private Validation valid;
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File("data/userList.txt");
+	File file = new File(".\\src\\data\\userList.txt");
 	
 	
 	public UserRepository(Validation valid) {
@@ -98,7 +98,7 @@ public class UserRepository implements Repository<User> {
 			fiOut.newLine();
 
 			for (User user : users) {
-				String str = (user.getId() + "/" + user.getPw() + "/" + user.getUserName() + "/" + user.getOrder());
+				String str = (user.getId() + "/" + user.getPw() + "/" + user.getUserName() + "/" + user.getOrder()+ "/" + user.getLockStack() + "/" + user.getIsReport());
 				fiOut.write(str);
 				fiOut.newLine();
 			}
