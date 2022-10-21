@@ -20,7 +20,7 @@ public class UserRepository implements Repository<User> {
 	private HashMap <String, User> userMap;
 	private Validation valid;
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File("PlanTheMenu\\\\src\\\\data\\userList.txt");
+	File file = new File("data/userList.txt");
 	
 	
 	public UserRepository(Validation valid) {

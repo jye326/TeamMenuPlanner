@@ -62,7 +62,7 @@ public class MenuRepository implements Repository<Menu> {
 		} catch (FileNotFoundException e1) {
 			createFile();
 		} catch (Exception e2) {
-			System.out.println(e2.getMessage());
+			
 		}
 		return null;
 	}
