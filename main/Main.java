@@ -33,6 +33,7 @@ public class Main {
 		//getuserlist랑 getusermap 다른건가
 		//readfile 안에 users가 아니라 Usermap(전역변수)에 값 할당해야하는거 아닌가 
 		//storelist도 똑같은 문제
+		//박성준
 		
 		us = new UserService(ur, v);
 		ms = new MenuService(mr, ur, v);
