@@ -24,7 +24,7 @@ public class MenuRepository implements Repository<Menu> {
 	private Menu[] teamMenu = new Menu[7];
 
 	public MenuRepository(HashMap<String, User> users, HashMap<String, Store> stores) {
-		this.readFile(users, stores);
+		teamMenu = this.readFile(users, stores);
 	}
 	
 	/*

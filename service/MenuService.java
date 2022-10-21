@@ -29,13 +29,13 @@ public class MenuService {
 	public void teamMenuPlan() {
 		int cCount = 0;	//기능 사용했는지
 		Menu[] origin = new Menu[7];
-		origin = mr.getTeamMenu().clone();
+//		origin = mr.getTeamMenu().clone();
 		if(checkReported()) {	//제출 안 했으면
 			if(inspectTeamMenu()) {	//조정 할거면
 				while(true) {
-					showTeamMenu();
+//					showTeamMenu();
 					String str = scan.nextLine();
-					if(true) {
+					if() {
 						
 					}
 					if(cCount != 1) {
@@ -44,7 +44,7 @@ public class MenuService {
 					}
 					
 				}
-			}else {
+			}else {	//조정 안하면
 				System.out.println("=====[식단표가 확정 되었습니다.]=====");
 			}
 		}
@@ -159,10 +159,27 @@ public class MenuService {
 	public void showTeamMenu() {
 		Menu[] teamMenues = mr.getTeamMenu();
 		int total = getTotalNameLength(wm);
+		int space = (total-9)/7;
+		int iter = 7;
 		System.out.println("*******[식단표 조정]*******\n\n");
 		System.out.print("### 나의 서열 : " + ur.getCurrentUser().getOrder() + " ###");
-		System.out.print("");
-		
+		System.out.println(printLayout(total + 14 ,0));
+		for(int i=0; i<7; i++) {
+			System.out.print(printLayout(week[i], space));
+		}
+		System.out.println(printLayout(total + 14 ,0));		//월화수목금 출력까지 완
+		System.out.println(printLayout(iter ,space));
+		for(int i=0; i<7; i++) {
+			System.out.print(printLayout(String.valueOf( wm[i].getUser().getOrder()), space));
+		}
+		System.out.println(printLayout(iter ,space));	//서열 출력까지 완
+		System.out.println(printLayout(total + 14 ,0));
+		System.out.println(printLayout(iter ,space));
+		for(int i=0; i<7; i++) {
+			System.out.print(printLayout(String.valueOf( wm[i].getName()), space));
+		}
+		System.out.println(printLayout(iter ,space));	//메뉴 이름까지 출력 완
+		System.out.println(printLayout(total + 14 ,0));
 	}	
 	
 	public boolean checkNearDays(int day, String menuName , Menu[] wm) {
@@ -205,7 +222,7 @@ public class MenuService {
 	 */
 	public boolean inspectTeamMenu() {
 		while(true) {
-			showTeamMenu();
+//			showTeamMenu();
 			System.out.println("식단표를 조정하시겠습니까?(y/n)");
 			String ans = scan.nextLine();
 			if(ans.equals("exit")) return false;
@@ -227,11 +244,39 @@ public class MenuService {
 	}
 	
 	public int getTotalNameLength(Menu[] m) {
-		int sum = 0;
-		for(int i=0; i<m.length; i++) {
-			sum +=m[i].getName().length();
+		int max = 0;
+		for(int i=0; i<m.length-1; i++) {
+			max = Math.max(Integer.parseInt(m[i].getName()), Integer.parseInt(m[i+1].getName()));
 		}
 		
-		return sum;
+		return max*7 + 14;
+	}
+	
+	/*
+	 * space : 공백 개수
+	 * i : 반복 횟수
+	 */
+	public String printLayout(int i, int space) {
+		String str="";
+		for(int j=0; j<i; j++) {
+			for(int k=0; k<space; k++) {
+				str += " ";
+			}
+			 str += "#";
+		}
+		return str;
+	}
+	
+	public String printLayout(String target, int space) {
+		String str = "#";
+		for(int i=0; i<space/2; i++) {
+			str += " ";
+		}
+		str += target;
+		for(int i=space/2; i<space; i++) {
+			str += " ";
+		}
+		
+		return str;
 	}
 }

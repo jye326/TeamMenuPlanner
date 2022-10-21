@@ -25,7 +25,7 @@ public class UserRepository implements Repository<User> {
 	
 	public UserRepository(Validation valid) {
 		this.valid = valid;
-		this.readFile();
+		userMap = this.readFile();
 	}
 
 	/*
