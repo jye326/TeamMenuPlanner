@@ -20,12 +20,12 @@ import model.User;
 public class MenuRepository implements Repository<Menu> {
 
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File(".\\src\\data\\teamMenuPlanner.txt");	//팀 주간 식단표 텍스트
+	File file = new File("datateamMenuPlanner.txt");	//팀 주간 식단표 텍스트
 //	private HashMap<String, Menu> menuMap;
 	private Menu[] teamMenu = new Menu[8];
 
 	public MenuRepository(HashMap<String, User> users, HashMap<String, Store> stores) {
-		this.readFile(users, stores);
+		teamMenu = this.readFile(users, stores);
 	}
 	
 	/*

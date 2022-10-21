@@ -22,12 +22,17 @@ public class Validation {
     * 요일 -> 요일 / 락
     */
    public boolean teamMenuPlannerInputCheck(String str) {
-      String[] strArr = str.split("/|->");
-      for(int i=0; i<strArr.length; i++) {
-         strArr[i] = strArr[i].trim();
+	  if(str.length() == 0) return false;	//아무것도 입력 안하면 false
+	  
+      String[] strArr = str.split(" / | -> ");
+      if(strArr.length == 3 || strArr.length == 2) {	//입력 인자 개수가 올바르면
+    	  for(int i=0; i<strArr.length; i++) {
+    	         strArr[i] = strArr[i].trim();
+    	      }
+    	  
+      }else {	//인자 개수가 2 or 3이 아니면
+    	  return false;  
       }
-      
-      return false;
    }
    
    // >/화 / 짜장면
