@@ -20,12 +20,14 @@ public class UserRepository implements Repository<User> {
 	private HashMap <String, User> userMap;
 	private Validation valid;
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File("data/userList.txt");
+
+	
+	File file = new File(".\\src\\data\\userList.txt");
 	
 	
 	public UserRepository(Validation valid) {
 		this.valid = valid;
-		this.userMap =  this.readFile();
+		userMap = this.readFile();
 	}
 
 	/*
@@ -98,7 +100,7 @@ public class UserRepository implements Repository<User> {
 			fiOut.newLine();
 
 			for (User user : users) {
-				String str = (user.getId() + "/" + user.getPw() + "/" + user.getUserName() + "/" + user.getOrder());
+				String str = (user.getId() + "/" + user.getPw() + "/" + user.getUserName() + "/" + user.getOrder()+ "/" + user.getLockStack() + "/" + user.getIsReport());
 				fiOut.write(str);
 				fiOut.newLine();
 			}
@@ -113,7 +115,6 @@ public class UserRepository implements Repository<User> {
 		User user;
 		user = (User)o;
 		userMap.put(user.getId(), user);
-		this.readFile();
 		return true;
 	}
 	
@@ -143,14 +144,20 @@ public class UserRepository implements Repository<User> {
 		currentUser.setOrder(i);
 	}
 	
-	
-	
-	public HashMap<String, User> getUserMap() {
+	public HashMap<String, User> getUserlist() {
 		return userMap;
 	}
 
+	public void setUserlist(HashMap<String, User> userMap) {
+		userMap = userMap;
+	}
+	
+	public HashMap<String, User> getUserMap() {
+		return this.readFile();
+	}
+
 	public void setUserMap(HashMap<String, User> userMap) {
-		this.userMap = userMap;
+		userMap = userMap;
 	}
 
 }

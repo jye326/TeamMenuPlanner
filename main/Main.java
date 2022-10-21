@@ -14,8 +14,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		
-		
 		UserService us;
 		MenuService ms;
 		StoreService ss;
@@ -27,7 +25,12 @@ public class Main {
 		Validation v = new Validation();
 		UserRepository ur = new UserRepository(v);		
 		StoreRepository sr = new StoreRepository();
+
 		MenuRepository mr = new MenuRepository(ur.getUserMap(), sr.getStoreMap());
+	
+
+		
+		
 		
 		us = new UserService(ur, v);
 		ms = new MenuService(mr, ur, v);
