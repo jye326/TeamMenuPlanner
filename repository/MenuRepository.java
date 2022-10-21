@@ -20,7 +20,7 @@ import model.User;
 public class MenuRepository implements Repository<Menu> {
 
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File("datateamMenuPlanner.txt");	//팀 주간 식단표 텍스트
+	File file = new File(".\\src\\data\\teamMenuPlanner.txt");	//팀 주간 식단표 텍스트
 //	private HashMap<String, Menu> menuMap;
 	private Menu[] teamMenu = new Menu[8];
 
@@ -56,7 +56,6 @@ public class MenuRepository implements Repository<Menu> {
 				Menu menu = new Menu(str[0].trim(), str[1].trim(), users.get(str[2].trim()), str[3].trim().equals("1"));
 				if (this.checkContain(teamMenu, users, stores, menu)) {
 					teamMenu[menu.getDay()] =  menu;
-					System.out.println(menu.getDay()+" "+menu.getName());
 				}
 			}
 			//example
@@ -81,31 +80,26 @@ public class MenuRepository implements Repository<Menu> {
 		ArrayList<Store> st = new ArrayList<Store>();
 		st.addAll(stores.values());
 
-		System.out.println("here1");
 		try {
 			if (menus[menu.getDay()]!= null) {
 				return false;
 			}
 		} catch (Exception e) {return false;}
-		System.out.println("here2");
 		try {
 			if (!this.checkStore(st, menu.getName()) || !this.checkUserId(us, menu.getUser().getId())) {
 				return false;
 			} 
 		} catch (Exception e) {return false;}
-		System.out.println("here3");
 		try {
 			if (menus[menu.getDay()-1].getName().equals(menu.getName())) {
 				return false;
 			}
 		} catch (Exception e) {}
-		System.out.println("here4");
 		try {
 			if (menus[menu.getDay()+1].getName().equals(menu.getName()))
 				return false;
 		} 
 		catch (Exception e2) {}
-		System.out.println("here5");
 		return true;
 	}
 
