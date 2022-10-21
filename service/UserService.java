@@ -15,7 +15,7 @@ public class UserService {
 	
 	public UserService(UserRepository usRepository, Validation v) {	
 		this.usRepository = usRepository;
-		this.userMap = this.usRepository.getUserMap();
+		this.userMap = this.usRepository.getUserlist();
 		this.v = v;
 	}
 
@@ -65,7 +65,7 @@ public class UserService {
 			String[] IDPW = v.loginInputCheck(login_input, userMap).split(" ");	//IDPW[0] : ID, IDPW[1] : PW
 			userMap = usRepository.readFile();	//파일에서 유저 정보를 읽어서 Hashmap에 저장
 			if(userMap.containsKey(IDPW[0])) {	//입력한 ID가 존재
-				if(userMap.get(IDPW[0]).getPw() == IDPW[1]) {	//ID와 비밀번호가 일치하는 경우
+				if(userMap.get(IDPW[0]).getPw().equals(IDPW[1])) {	//ID와 비밀번호가 일치하는 경우
 					usRepository.setCurrentUser(userMap.get(IDPW[0]));//아이디로 찾아낸 유저를 currentUser로 변경
 					System.out.println("로그인 되었습니다!");
 					System.out.println("사용자 이름 : "+usRepository.getCurrentUser().getUserName());

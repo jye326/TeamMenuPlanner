@@ -199,11 +199,11 @@ public class Validation {
          return 0;
       if (!userNameCheck(ArraysStr[4], users))
          return 0;
-      ArrayList<User> userArr = (ArrayList<User>) users.values();
-      for(User u: userArr) {
-         if(u.getOrder() == Integer.parseInt(ArraysStr[6]))
-               return 1;
-      }
+      //ArrayList<User> userArr = (ArrayList<User>) users.values();
+      //for(User u: userArr) {
+        // if(u.getOrder() == Integer.parseInt(ArraysStr[6]))
+          //     return 1;
+      //}
       return 2;   //유효한 아이디
    }
 

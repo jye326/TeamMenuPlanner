@@ -20,7 +20,7 @@ public class UserRepository implements Repository<User> {
 	private HashMap <String, User> userMap;
 	private Validation valid;
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File(".\\src\\data\\userList.txt");
+	File file = new File("PlanTheMenu\\\\src\\\\data\\userList.txt");
 	
 	
 	public UserRepository(Validation valid) {
@@ -42,10 +42,10 @@ public class UserRepository implements Repository<User> {
 	/* 파일 읽기 */
 	   // ArrayList -> HashMap 으로 수정
 	   public HashMap<String,User> readFile() {
+	      HashMap<String,User> users = new HashMap<>();         //ArrayList<User> users = new ArrayList<>();
 	      try {
 	         Scanner sc = new Scanner(file);
 	         int n = Integer.parseInt(sc.nextLine());
-	         HashMap<String,User> users = new HashMap<>();         //ArrayList<User> users = new ArrayList<>();
 	         int i = 0;
 	         while (sc.hasNextLine()) {
 	            String[] str = sc.nextLine().split("/");
@@ -61,13 +61,14 @@ public class UserRepository implements Repository<User> {
 	            }
 	            
 	            if(valid.idCheck(user.getId()) && !users.containsKey(user.getId())
-	                  && valid.pwCheck(user.getPw()) && valid.userNameCheck(user.getUserName()))
+	                  && valid.pwCheck(user.getPw()) && valid.userNameCheck(user.getUserName())) {
 	               users.put(user.getId(), user);   // users.add(user);
+	             //  System.out.println("추가");
+	            }
 	            else 
 	               throw new NullPointerException();//2
 	               
 	         }
-	         return users;
 	      } catch (FileNotFoundException e1) { 
 	         createFile();
 	      } catch (IndexOutOfBoundsException e2) {//1
@@ -83,7 +84,8 @@ public class UserRepository implements Repository<User> {
 	         System.out.println("userList 텍스트 파일에 문제가 있습니다. 강제 종료합니다.");
 	         System.exit(0);
 	      }
-	      return new HashMap<String,User>() ;
+	      userMap = users;
+	      return users;
 	   }
 
 	/* 파일 쓰기 */
@@ -126,21 +128,6 @@ public class UserRepository implements Repository<User> {
 		List<User> list = (List<User>) this.userMap.values();
 		return list;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public User getCurrentUser() {
@@ -164,7 +151,7 @@ public class UserRepository implements Repository<User> {
 	}
 	
 	public HashMap<String, User> getUserMap() {
-		return userMap;
+		return this.readFile();
 	}
 
 	public void setUserMap(HashMap<String, User> userMap) {

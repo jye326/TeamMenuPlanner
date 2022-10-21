@@ -25,11 +25,14 @@ public class Main {
 //		}
 		
 		Validation v = new Validation();
-		UserRepository ur = new UserRepository(v);
+		UserRepository ur = new UserRepository(v);		
 		StoreRepository sr = new StoreRepository();
-		MenuRepository mr = new MenuRepository(ur.getUserMap(), sr.getStoreMap());
+		System.out.println(sr.getStoreMap());
+		MenuRepository mr = new MenuRepository(ur.getUserlist(), sr.getStoreMap());
 		
-		
+		//getuserlist랑 getusermap 다른건가
+		//readfile 안에 users가 아니라 Usermap(전역변수)에 값 할당해야하는거 아닌가 
+		//storelist도 똑같은 문제
 		
 		us = new UserService(ur, v);
 		ms = new MenuService(mr, ur, v);
