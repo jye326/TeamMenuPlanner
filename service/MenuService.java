@@ -158,7 +158,11 @@ public class MenuService {
 	 */
 	public void showTeamMenu() {
 		Menu[] teamMenues = mr.getTeamMenu();
-		System.out.println("*******[식단표 조정]*******");
+		int total = getTotalNameLength(wm);
+		System.out.println("*******[식단표 조정]*******\n\n");
+		System.out.print("### 나의 서열 : " + ur.getCurrentUser().getOrder() + " ###");
+		System.out.print("");
+		
 	}	
 	
 	public boolean checkNearDays(int day, String menuName , Menu[] wm) {
@@ -220,5 +224,14 @@ public class MenuService {
 		}
 		
 		return -1;
+	}
+	
+	public int getTotalNameLength(Menu[] m) {
+		int sum = 0;
+		for(int i=0; i<m.length; i++) {
+			sum +=m[i].getName().length();
+		}
+		
+		return sum;
 	}
 }

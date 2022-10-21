@@ -19,11 +19,11 @@ public class StoreRepository implements Repository<Store> {
 	private HashMap<String, Store> storeMap;
 	
 	/*텍스트 파일 디렉토리, ##수정 필수##*/
-	private File file = new File("PlanTheMenu\\src\\data\\storeList.txt");
+	private File file = new File("data/storeList.txt");
 	
 	
 	public StoreRepository() {
-		this.readFile();
+		storeMap = this.readFile();
 	}
 
 	public HashMap<String, Store> getStoreMap() {
@@ -84,13 +84,9 @@ public class StoreRepository implements Repository<Store> {
 			Scanner sc = new Scanner(file);
 			HashMap<String, Store> storeMaptemp = new HashMap<String, Store>();
 			while (sc.hasNextLine()) {
-				System.out.println("2");
 				String[] str = sc.nextLine().split("/");
-				System.out.println("2");
 				Store store = new Store(str[0].trim(), str[1].trim(), str[2].trim());
-				System.out.println("2");
 				storeMaptemp.put(store.getStoreName() ,store);
-				System.out.println("2");
 			}
 			storeMap = storeMaptemp;
 			return storeMap;
