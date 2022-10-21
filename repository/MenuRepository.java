@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -19,9 +20,9 @@ import model.User;
 public class MenuRepository implements Repository<Menu> {
 
 	/* 텍스트 파일 디렉토리, ##수정 필수## */
-	File file = new File("data/teamMenuPlanner.txt");	//팀 주간 식단표 텍스트
+	File file = new File(".\\src\\data\\teamMenuPlanner.txt");	//팀 주간 식단표 텍스트
 //	private HashMap<String, Menu> menuMap;
-	private Menu[] teamMenu = new Menu[7];
+	private Menu[] teamMenu = new Menu[8];
 
 	public MenuRepository(HashMap<String, User> users, HashMap<String, Store> stores) {
 		this.readFile(users, stores);
@@ -49,45 +50,62 @@ public class MenuRepository implements Repository<Menu> {
 		int n = 0;
 		try {
 			Scanner sc = new Scanner(file);
-			Menu[] menus = new Menu[7];
+			//example
 			while (sc.hasNextLine()) {
 				String[] str = sc.nextLine().split("/");
 				Menu menu = new Menu(str[0].trim(), str[1].trim(), users.get(str[2].trim()), str[3].trim().equals("1"));
-				if (this.checkContain(menus, (ArrayList<User>)users.values(), (ArrayList<Store>)stores.values(), menu)) {
-					menus[menu.getDay()] =  menu;
+				if (this.checkContain(teamMenu, users, stores, menu)) {
+					teamMenu[menu.getDay()] =  menu;
+					System.out.println(menu.getDay()+" "+menu.getName());
 				}
 			}
-			return menus;
+			//example
+//			for(Menu i: teamMenu) {
+//				System.out.println(i.getDay()+" "+i.getName());
+//			}
+			return teamMenu;
 
 		} catch (FileNotFoundException e1) {
 			createFile();
 		} catch (Exception e2) {
-			
+			System.out.println(e2.getMessage());
 		}
 		return null;
 	}
 	
-	public boolean checkContain(Menu[] menus, ArrayList<User> users, ArrayList<Store> stores, Menu menu) {
+	public boolean checkContain(Menu[] menus, HashMap<String, User> users, HashMap<String, Store> stores, Menu menu) {
+        
+		ArrayList<User> us = new ArrayList<User>();
+		us.addAll(users.values());
 		
+		ArrayList<Store> st = new ArrayList<Store>();
+		st.addAll(stores.values());
+
+		System.out.println("here1");
 		try {
 			if (menus[menu.getDay()]!= null) {
 				return false;
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {return false;}
+		System.out.println("here2");
 		try {
-			if (!this.checkStore(stores, menu.getName()) || !this.checkUserId(users, menu.getUser().getId())) {
+			if (!this.checkStore(st, menu.getName()) || !this.checkUserId(us, menu.getUser().getId())) {
 				return false;
 			} 
-		} catch (Exception e) {}
+		} catch (Exception e) {return false;}
+		System.out.println("here3");
 		try {
 			if (menus[menu.getDay()-1].getName().equals(menu.getName())) {
 				return false;
 			}
 		} catch (Exception e) {}
+		System.out.println("here4");
 		try {
 			if (menus[menu.getDay()+1].getName().equals(menu.getName()))
 				return false;
-		} catch (Exception e) {}
+		} 
+		catch (Exception e2) {}
+		System.out.println("here5");
 		return true;
 	}
 
