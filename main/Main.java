@@ -47,7 +47,7 @@ public class Main {
 								}else if(mainMenu.equals("2")) {
 									ss.searchStore();
 								}else if(mainMenu.equals("3")) {
-									//ms.teamMenuPlan();
+									ms.teamMenuPlan();
 								}else if(mainMenu.equals("4")) {
 									us.changeOrder();
 								}else if(mainMenu.equals("5")) {
